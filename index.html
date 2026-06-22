@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Babitonga Materiais de Construção | Confiança do Começo ao Fim</title>
-<meta name="description" content="Babitonga Materiais de Construção — Da fundação ao acabamento, os materiais certos para transformar projetos em realidade. Atendimento humanizado, entrega rápida e preço justo.">
+<title>ESG | Babitonga Materiais de Construção</title>
 
 <!-- Premium Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,11 +12,7 @@
 
 <!-- GSAP and Lucide Icons -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://unpkg.com/split-type"></script>
 
 <style>
 :root {
@@ -46,7 +41,6 @@
 }
 
 html {
-
   font-size: 16px;
   background: var(--bg-dark);
 }
@@ -58,14 +52,6 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-}
-
-/* ANIMATED BACKGROUND */
-#bg-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
 }
 
 /* NOISE OVERLAY */
@@ -126,76 +112,7 @@ body.has-mouse .cursor-grow #cursor-ring {
   body.has-mouse { cursor: auto; }
 }
 
-/* PRELOADER */
-#preloader {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-dark);
-  z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-}
-
-#preloader-logo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-#preloader-logo img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  border-radius: 50%;
-  transform: scale(2.5);
-  margin-right: 32px;
-  margin-left: 16px;
-}
-
-#preloader-logo span {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(28px, 6vw, 48px);
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-
-#preloader-bar-wrap {
-  width: 180px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-#preloader-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--primary), var(--blue-light));
-  width: 0%;
-  border-radius: 2px;
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
-
-#progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--blue-light));
-  z-index: 9999;
-  width: 0%;
-}
-
-/* FLOATING GLOW BACKGROUNDS */
+/* GLOW ORBS */
 .glow-bg {
   position: absolute;
   width: 50vw;
@@ -215,23 +132,10 @@ body.has-mouse .cursor-grow #cursor-ring {
   66% { transform: translate(-2%, 4%) scale(0.95); opacity: 0.35; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .glow-bg { animation: none; }
-}
-
 .glow-orange { background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%); }
 .glow-blue { background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%); }
 
-/* GLASS PANEL UTILITY */
-.glass-panel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-}
-
-/* HEADER NAVIGATION */
+/* HEADER */
 #header {
   position: fixed;
   top: 20px;
@@ -325,11 +229,13 @@ nav.desktop a::after {
 
 nav.desktop a:hover { color: #fff; }
 nav.desktop a:hover::after { width: 100%; }
+nav.desktop a.active { color: #fff; }
+nav.desktop a.active::after { width: 100%; background: transparent; }
 
 .nav-esg-link span { transition: color 0.4s ease; display: inline-block; }
-.nav-esg-link:hover .e { color: #10b981; }
-.nav-esg-link:hover .s { color: #ef4444; }
-.nav-esg-link:hover .g { color: #3b82f6; }
+.nav-esg-link:hover .e, .nav-esg-link.active .e { color: #10b981; }
+.nav-esg-link:hover .s, .nav-esg-link.active .s { color: #ef4444; }
+.nav-esg-link:hover .g, .nav-esg-link.active .g { color: #3b82f6; }
 
 .btn-wpp {
   display: inline-flex;
@@ -356,223 +262,14 @@ nav.desktop a:hover::after { width: 100%; }
   box-shadow: 0 8px 24px rgba(240, 120, 32, 0.3);
 }
 
-.btn-wpp:active, .btn-primary:active, .btn-secondary:active {
+.btn-wpp:active {
   transform: scale(0.96) !important;
 }
 
 .btn-wpp i { width: 16px; height: 16px; }
 
-#hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-#hamburger span {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background: #fff;
-  transition: transform 0.3s, opacity 0.3s;
-}
-
-/* MOBILE NAV MENU */
-#mobile-menu {
-  position: fixed;
-  inset: 0;
-  background: rgba(12, 21, 36, 0.96);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  transform: translateY(-100%);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-#mobile-menu.open { transform: translateY(0); }
-
-#mobile-menu a {
-  font-size: 32px;
-  font-weight: 700;
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-#mobile-menu a:hover { color: var(--primary); }
-
-/* HERO SECTION */
-#inicio {
-  min-height: 100dvh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 120px 24px 80px;
-  overflow: hidden;
-  text-align: center;
-  z-index: 2;
-}
-
-#hero-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(12, 21, 36, 0.6) 0%, var(--bg-dark) 100%), 
-              url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
-  z-index: -1;
-  transform: scale(1.05);
-}
-
-#hero-content {
-  max-width: 900px;
-  z-index: 2;
-}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 24px;
-  background: rgba(240, 120, 32, 0.08);
-  padding: 8px 20px;
-  border-radius: 9999px;
-  border: 1px solid rgba(240, 120, 32, 0.15);
-}
-
-.hero-title {
-  font-size: clamp(38px, 6vw, 76px);
-  font-weight: 800;
-  line-height: 1.08;
-  color: #fff;
-  letter-spacing: -0.03em;
-  margin-bottom: 24px;
-}
-
-.hero-title span.accent {
-  color: var(--primary);
-  background: linear-gradient(135deg, var(--primary) 0%, #ff9c54 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-desc {
-  max-width: 600px;
-  margin: 0 auto 40px;
-  font-size: 17px;
-  color: var(--text-muted);
-  font-weight: 400;
-  line-height: 1.7;
-}
-
-.hero-ctas {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--primary);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 16px 32px;
-  border-radius: 9999px;
-  box-shadow: 0 4px 24px rgba(240, 120, 32, 0.3);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-primary i { width: 18px; height: 18px; }
-
-.btn-primary:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 36px rgba(240, 120, 32, 0.45);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
-  text-decoration: none;
-  padding: 16px 32px;
-  border-radius: 9999px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-secondary i { width: 18px; height: 18px; }
-
-.btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.15);
-  transform: scale(1.05);
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.08);
-}
-
-/* MARQUEE */
-.marquee-strip {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--glass-border);
-  border-bottom: 1px solid var(--glass-border);
-  padding: 20px 0;
-  overflow: hidden;
-  position: relative;
-  z-index: 3;
-}
-
-.marquee-inner {
-  display: flex;
-  white-space: nowrap;
-  animation: marqueeScroll 30s linear infinite;
-}
-
-.marquee-inner span {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 0 40px;
-}
-
-.marquee-inner .dot { color: var(--primary); }
-
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* GENERAL SECTION STYLING */
-section.py-section {
+/* SECTIONS */
+.py-section {
   padding: 120px 24px;
   position: relative;
   z-index: 2;
@@ -585,126 +282,178 @@ section.py-section {
   z-index: 2;
 }
 
+/* TYPOGRAPHY */
 .section-header-stacked {
-  max-width: 700px;
-  margin-bottom: 72px;
+  text-align: center;
+  margin-bottom: 64px;
+  max-width: 800px;
+  margin-inline: auto;
 }
 
 .section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--primary);
-  margin-bottom: 16px;
-  display: block;
+  margin-bottom: 24px;
+  background: rgba(240, 120, 32, 0.08);
+  padding: 8px 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(240, 120, 32, 0.15);
 }
 
 .section-title {
-  font-size: clamp(28px, 4vw, 48px);
   font-weight: 800;
-  line-height: 1.15;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.1;
   color: #fff;
   letter-spacing: -0.02em;
 }
 
 .section-title em {
-  font-style: italic;
-  font-weight: 700;
+  font-style: normal;
   color: var(--primary);
 }
 
-/* SOBRE / HISTÓRIA */
-.sobre-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: stretch;
+.hero-desc {
+  max-width: 600px;
+  margin: 20px auto 40px;
+  font-size: 17px;
+  color: var(--text-muted);
+  font-weight: 400;
+  line-height: 1.7;
 }
 
-.sobre-visual {
-  position: relative;
+/* CARDS */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.card-dif {
+  grid-column: span 6;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px 32px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  min-height: 360px;
 }
 
-.sobre-img-wrap {
-  position: relative;
+.esg-image-wrap {
+  grid-column: span 6;
   border-radius: 24px;
   overflow: hidden;
-  flex: 1;
-  min-height: 480px;
+  position: relative;
   border: 1px solid var(--glass-border);
+  min-height: 360px;
+  background: var(--bg-card);
 }
-
-.sobre-img-wrap img {
+.esg-image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.8) contrast(1.1);
+}
+.esg-image-wrap:hover img {
+  transform: scale(1.1);
+  filter: brightness(1) contrast(1.1);
 }
 
-.sobre-badge {
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  background: var(--primary);
-  color: #fff;
-  padding: 30px 40px;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 15px 30px rgba(240, 120, 32, 0.3);
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.sobre-badge-num {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 56px;
-  line-height: 1;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.sobre-badge-label {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-/* HOVER EFFECTS */
-.btn-primary, .btn-secondary, #hamburger {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-/* CARDS AND BENTOS HOVER */
-.card-dif, .testimonial-card, .sobre-visual {
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-}
-.card-dif:hover, .testimonial-card:hover, .sobre-visual:hover {
+.card-dif:hover {
   transform: translateY(-8px);
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
-.card-dif.destaque:hover {
-  box-shadow: 0 20px 40px rgba(240, 120, 32, 0.3);
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(12, 21, 36, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-bottom: 24px;
+  transition: all 0.4s ease;
 }
 
-.gal-item {
-  overflow: hidden;
+/* Custom ESG Interactive Colors */
+.card-env .card-icon { color: #10b981; }
+.card-soc .card-icon { color: #ef4444; }
+.card-gov .card-icon { color: #3b82f6; }
+
+.card-env:hover .card-icon {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+  transform: scale(1.05);
 }
-.gal-item img, .gal-item video, .sobre-img-wrap img {
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+.card-soc:hover .card-icon {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  transform: scale(1.05);
 }
-.gal-item:hover img, .gal-item:hover video, .sobre-img-wrap:hover img {
-  transform: scale(1.15);
+.card-gov:hover .card-icon {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  transform: scale(1.05);
 }
 
-/* FOOLPROOF NATIVE CSS REVEALS */
+.card-env:hover { border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15); }
+.card-soc:hover { border-color: rgba(239, 68, 68, 0.3); box-shadow: 0 20px 40px rgba(239, 68, 68, 0.15); }
+.card-gov:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); }
+
+.card-header-flex {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.card-header-flex .card-icon {
+  margin-bottom: 0;
+}
+
+.card-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
+}
+
+.card-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+  align-self: flex-start;
+  margin-top: 24px;
+}
+
+/* NATIVE CSS REVEALS */
 .reveal-css {
   opacity: 0;
   transform: translateY(30px);
@@ -717,634 +466,26 @@ section.py-section {
 }
 .reveal-css-delay-1 { transition-delay: 0.1s; }
 .reveal-css-delay-2 { transition-delay: 0.2s; }
-.reveal-css-delay-3 { transition-delay: 0.3s; }
-.reveal-css-delay-4 { transition-delay: 0.4s; }
 
-.sobre-text-col {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.sobre-title {
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #fff;
-  letter-spacing: -0.02em;
-  margin-bottom: 20px;
-}
-
-.sobre-title em {
-  color: var(--primary);
-  font-style: italic;
-  font-weight: 700;
-}
-
-.sobre-text {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 28px;
-}
-
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 32px;
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  flex: 1;
-}
-
-.timeline-item {
-  display: flex;
-  gap: 20px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.timeline-item:last-child { border-bottom: none; }
-
-.tl-icon-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 4px;
-}
-
-.tl-dot {
-  width: 12px;
-  height: 12px;
-  background: var(--primary);
-  border-radius: 50%;
-  box-shadow: 0 0 12px var(--primary);
-  flex-shrink: 0;
-}
-
-.tl-line {
-  width: 2px;
-  flex-grow: 1;
-  background: rgba(255, 255, 255, 0.06);
-  margin-top: 8px;
-}
-
-.timeline-item:last-child .tl-line { display: none; }
-
-.tl-content h3 {
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 4px;
-}
-
-.tl-content p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-/* DIFERENCIAIS (BENTO GRID) */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card-dif {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  padding: 36px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s, border-color 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card-dif::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(240, 120, 32, 0.3), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.card-dif:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
-}
-
-.card-dif:hover::before { opacity: 1; }
-
-.card-dif.wide-col { grid-column: span 2; }
-
-.card-dif-top { margin-bottom: 28px; }
-
-.card-icon {
-  width: 52px;
-  height: 52px;
-  background: rgba(240, 120, 32, 0.08);
-  border: 1px solid rgba(240, 120, 32, 0.15);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary);
-  margin-bottom: 24px;
-}
-
-.card-icon i { width: 22px; height: 22px; }
-
-.card-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.card-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-.card-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-muted);
-  opacity: 0.4;
-  align-self: flex-start;
-}
-
-/* GALERIA SECTION */
-.gallery-bento {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 260px;
-  gap: 12px;
-}
-
-.gal-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid var(--glass-border);
-}
-
-.gal-item img, .gal-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.gal-item:hover img, .gal-item:hover video {
-  transform: scale(1.06);
-}
-
-.gal-item-1 { grid-column: span 7; grid-row: span 2; }
-.gal-item-2 { grid-column: span 5; }
-.gal-item-3 { grid-column: span 5; }
-.gal-item-4 { grid-column: span 5; }
-.gal-item-5 { grid-column: span 7; }
-
-.gal-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(12, 21, 36, 0.9) 0%, transparent 50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.gal-item:hover .gal-overlay { opacity: 1; }
-
-.gal-tag {
-  font-size: 9px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--primary);
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
-}
-
-.gal-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* NÚMEROS / STATS */
-.nums-wrapper {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
-  padding: 56px 40px;
-}
-
-.nums-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.num-item {
-  text-align: center;
-  position: relative;
-}
-
-.num-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 10%;
-  height: 80%;
-  width: 1px;
-  background: var(--border-color);
-}
-
-.num-value {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(36px, 5vw, 56px);
-  color: #fff;
-  line-height: 1;
-}
-
-.num-suffix { color: var(--primary); }
-
-.num-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-top: 12px;
-  display: block;
-}
-
-/* DEPOIMENTOS */
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.testimonial-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 36px;
-  transition: transform 0.3s ease, border-color 0.3s;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-hover);
-}
-
-.testimonial-stars {
-  color: var(--primary);
-  font-size: 14px;
-  margin-bottom: 16px;
-  letter-spacing: 2px;
-}
-
-.testimonial-text {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.testimonial-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(240, 120, 32, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary);
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.testimonial-name {
-  font-weight: 600;
-  font-size: 14px;
-  color: #fff;
-}
-
-.testimonial-role {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* SOCIAL & CTA SECTIONS */
-.social-panel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--glass-border);
-  border-radius: 32px;
-  padding: 64px;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.social-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(240, 120, 32, 0.4), transparent);
-}
-
-.social-btns {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.btn-instagram {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 14px 28px;
-  border-radius: 9999px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.25);
-}
-
-.btn-instagram i { width: 16px; height: 16px; }
-
-.btn-instagram:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(220, 39, 67, 0.4);
-}
-
-/* CTA */
-#cta { text-align: center; }
-
-.cta-wrapper {
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--glass-border);
-  border-radius: 32px;
-  padding: 80px 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-wrapper::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 50% 100%, rgba(240, 120, 32, 0.06) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.cta-content {
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.cta-title {
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 800;
-  line-height: 1.1;
-  color: #fff;
-  margin-bottom: 24px;
-  letter-spacing: -0.02em;
-}
-
-.cta-title span { color: var(--primary); }
-
-.cta-desc {
-  font-size: 16px;
-  color: var(--text-muted);
-  margin-bottom: 40px;
-  line-height: 1.7;
-}
-
-/* FOOTER */
-footer {
-  background: rgba(6, 10, 18, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 80px 24px 40px;
-  border-top: 1px solid var(--glass-border);
-  position: relative;
-  z-index: 2;
-}
-
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 64px;
-  padding-bottom: 64px;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 32px;
-}
-
-.footer-brand p {
-  font-size: 14px;
-  color: var(--text-muted);
-  max-width: 320px;
-  margin: 20px 0 24px;
-  line-height: 1.7;
-}
-
-.footer-socials {
-  display: flex;
-  gap: 12px;
-}
-
-.footer-socials a {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.footer-socials a svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.footer-socials a i { width: 20px; height: 20px; }
-
-.footer-socials a:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: translateY(-2px);
-  background: rgba(240, 120, 32, 0.08);
-}
-
-.footer-col h4 {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.footer-col a {
-  display: block;
-  font-size: 14px;
-  color: var(--text-muted);
-  text-decoration: none;
-  margin-bottom: 12px;
-  transition: color 0.3s;
-}
-
-.footer-col a:hover { color: #fff; }
-
-.footer-contact {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.footer-contact i {
-  color: var(--primary);
-  width: 16px;
-  height: 16px;
-  margin-top: 3px;
-  flex-shrink: 0;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 1024px) {
-  .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
-  .sobre-visual { max-width: 600px; margin: 0 auto; }
-  .sobre-img-wrap { min-height: 360px; }
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
-  .card-dif.wide-col { grid-column: span 1; }
-  .testimonial-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-  .gallery-bento {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 220px;
-  }
-  .gal-item { grid-column: span 1 !important; grid-row: span 1 !important; }
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .card-dif, .esg-image-wrap { grid-column: span 12; }
 }
 
 @media (max-width: 768px) {
-  #header { width: calc(100% - 24px); padding: 10px 16px; }
-  nav.desktop, .btn-wpp.desktop { display: none; }
+  .desktop { display: none !important; }
   #hamburger { display: flex; }
-  .bento-grid { grid-template-columns: 1fr; }
-  .nums-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-  .num-item:not(:last-child)::after { display: none; }
-  .nums-wrapper { padding: 40px 24px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-  .social-panel { padding: 40px 24px; }
-  .cta-wrapper { padding: 48px 24px; }
+  .card-dif, .esg-image-wrap { grid-column: span 12; }
 }
 </style>
 </head>
 <body>
 
-<!-- ANIMATED BACKGROUND CANVAS (WebGL) -->
-<div id="webgl-container" style="position: fixed; inset: 0; z-index: 0; pointer-events: none;"></div>
-
-<div id="progress"></div>
-
-<!-- PRELOADER -->
-<div id="preloader">
-  <div id="preloader-logo">
-    <img src="Logo Babitonga.png" alt="Logo">
-    <span>BABITONGA</span>
-  </div>
-  <div id="preloader-bar-wrap">
-    <div id="preloader-bar"></div>
-  </div>
-</div>
-
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- MOBILE NAV -->
-<div id="mobile-menu">
-  <a href="#inicio" onclick="toggleMenu()">Início</a>
-  <a href="#sobre" onclick="toggleMenu()">Sobre</a>
-  <a href="#diferenciais" onclick="toggleMenu()">Diferenciais</a>
-  <a href="#galeria" onclick="toggleMenu()">Galeria</a>
-  <a href="#contato" onclick="toggleMenu()">Contato</a>
-  <a href="https://esg-eight-tau.vercel.app/" target="_blank" onclick="toggleMenu()" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
-</div>
-
-<!-- NAVIGATION BAR -->
 <header id="header">
-  <a href="#inicio" class="logo-wrap" aria-label="Voltar ao início">
+  <a href="https://babitonga-lojao.vercel.app/#inicio" class="logo-wrap" aria-label="Voltar ao início">
     <img src="Logo Babitonga.png" alt="Babitonga Logo" class="logo-mark">
     <div>
       <span class="logo-title">BABITONGA</span>
@@ -1353,811 +494,132 @@ footer {
   </a>
 
   <nav class="desktop">
-    <a href="#inicio">Início</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#diferenciais">Diferenciais</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#contato">Contato</a>
-    <a href="https://esg-eight-tau.vercel.app/" target="_blank" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
+    <a href="https://babitonga-lojao.vercel.app/#inicio">Início</a>
+    <a href="https://babitonga-lojao.vercel.app/#sobre">Sobre</a>
+    <a href="https://babitonga-lojao.vercel.app/#diferenciais">Diferenciais</a>
+    <a href="https://babitonga-lojao.vercel.app/#galeria">Galeria</a>
+    <a href="https://babitonga-lojao.vercel.app/#contato">Contato</a>
+    <a href="https://esg-eight-tau.vercel.app/" class="active nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
   </nav>
 
   <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-wpp desktop" aria-label="Falar no WhatsApp">
     <i data-lucide="message-circle"></i>
     <span>Orçamento</span>
   </a>
-
-  <button id="hamburger" onclick="toggleMenu()" aria-label="Menu de Navegação">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
 </header>
 
-<!-- HERO SECTION -->
-<section id="inicio" style="position: relative; z-index: 10; background: var(--bg-dark);">
-  <div id="hero-bg"></div>
-  <div class="glow-bg glow-orange" style="top: 10%; left: 10%;"></div>
-  <div class="glow-bg glow-blue" style="bottom: 10%; right: 10%;"></div>
-  
-  <div id="hero-content">
-    <div class="hero-eyebrow">
-      <i data-lucide="map-pin" style="width:14px;height:14px;"></i>
-      Desde 2020 · São Francisco do Sul, SC
-    </div>
-    <h1 class="hero-title">Construindo <span class="accent">Confiança</span> em cada Projeto.</h1>
-    <p class="hero-desc">Da fundação ao acabamento, a Babitonga fornece os insumos e materiais ideais para sua obra com máxima pontualidade.</p>
-    <div class="hero-ctas">
-      <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-primary">
-        <i data-lucide="message-circle"></i>
-        <span>WhatsApp</span>
-      </a>
-      <a href="#galeria" class="btn-secondary">
-        <i data-lucide="store"></i>
-        <span>Conhecer Loja</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE STRIP -->
-<div class="marquee-strip">
-  <div class="marquee-inner">
-    <span>Atendimento Humanizado <span class="dot">·</span></span>
-    <span>Entrega Inteligente <span class="dot">·</span></span>
-    <span>Insumos Normatizados <span class="dot">·</span></span>
-    <span>Preço Justo <span class="dot">·</span></span>
-    <span>São Francisco do Sul <span class="dot">·</span></span>
-    <span>Atendimento Humanizado <span class="dot">·</span></span>
-    <span>Entrega Inteligente <span class="dot">·</span></span>
-    <span>Insumos Normatizados <span class="dot">·</span></span>
-    <span>Preço Justo <span class="dot">·</span></span>
-    <span>São Francisco do Sul <span class="dot">·</span></span>
-  </div>
-</div>
-
-<!-- SOBRE / HISTÓRIA -->
-<section id="sobre" class="py-section">
-  <div class="glow-bg glow-blue" style="top: 20%; left: -10%;"></div>
-  <div class="section-container">
-    <div class="sobre-grid">
-      <div class="sobre-visual">
-        <div class="sobre-img-wrap">
-          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" alt="Canteiro de obras" loading="lazy">
-        </div>
-        <div class="sobre-badge">
-          <span class="sobre-badge-num">+4</span>
-          <span class="sobre-badge-label">Anos de Atuação</span>
-        </div>
+<main style="padding-top: 100px;">
+  <!-- ESG INTRO SECTION -->
+  <section class="py-section" style="padding-bottom: 60px;">
+    <div class="glow-bg glow-blue" style="top: 10%; left: -10%;"></div>
+    <div class="section-container">
+      <div class="section-header-stacked reveal-css">
+        <span class="section-eyebrow">Práticas ESG</span>
+        <h1 class="section-title">Construindo um futuro <em><span style="color: #10b981;">sus</span><span style="color: #ef4444;">tentá</span><span style="color: #3b82f6;">vel.</span></em></h1>
+        <p class="hero-desc">O desenvolvimento não precisa custar o amanhã. A Babitonga assume responsabilidades diretas sobre o meio ambiente, a comunidade que nos cerca e a transparência das nossas operações.</p>
       </div>
+    </div>
+  </section>
 
-      <div class="sobre-text-col">
-        <span class="section-eyebrow">Nossa História</span>
-        <h2 class="sobre-title">Uma trajetória sólida nascida da <em>determinação</em>.</h2>
-        <p class="sobre-text">A Babitonga nasceu do espírito empreendedor do Bruno em 2020. Em meio aos desafios, ele estruturou uma empresa comprometida com a transparência e a eficiência logística na entrega de materiais civis.</p>
+  <!-- ESG PILLARS SECTION -->
+  <section class="py-section" style="padding-top: 0;">
+    <div class="glow-bg glow-orange" style="bottom: 10%; right: -10%;"></div>
+    <div class="section-container">
+      <div class="bento-grid" id="esg-grid">
         
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="tl-icon-wrap">
-              <div class="tl-dot"></div>
-              <div class="tl-line"></div>
+        <!-- E: Ambiental -->
+        <div class="card-dif card-env reveal-css">
+          <div class="card-dif-top">
+            <div class="card-header-flex">
+              <div class="card-icon"><i data-lucide="leaf"></i></div>
+              <h3 class="card-title">Ambiental</h3>
             </div>
-            <div class="tl-content">
-              <h3>2020 · Fundação Resiliente</h3>
-              <p>Início com foco em atendimento próximo e entregas rápidas na região.</p>
+            <p class="card-desc">Nosso pátio logístico possui uma visão clara voltada à preservação ambiental. Realizamos diariamente a <strong>reciclagem de materiais</strong> operacionais, garantindo a separação e destinação inteligente de isopor, caixas de papelão, plásticos e demais descartes gerados no manuseio dos suprimentos da construção civil.</p>
+          </div>
+          <span class="card-num">E</span>
+        </div>
+        <div class="esg-image-wrap reveal-css reveal-css-delay-1">
+          <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1000&auto=format&fit=crop" alt="Reciclagem de materiais" loading="lazy">
+        </div>
+
+        <!-- S: Social -->
+        <div class="card-dif card-soc reveal-css reveal-css-delay-1">
+          <div class="card-dif-top">
+            <div class="card-header-flex">
+              <div class="card-icon"><i data-lucide="heart"></i></div>
+              <h3 class="card-title">Social</h3>
             </div>
+            <p class="card-desc">Buscamos gerar um impacto positivo e duradouro na sociedade. Mantemos um sólido programa de <strong>doações a ONGs</strong> parceiras e fomentamos uma cultura de cuidado, engajando ativamente nossa equipe no <strong>voluntariado corporativo</strong> para apoiar e desenvolver a comunidade local de São Francisco do Sul.</p>
           </div>
-          <div class="timeline-item">
-            <div class="tl-icon-wrap">
-              <div class="tl-dot"></div>
-              <div class="tl-line"></div>
+          <span class="card-num">S</span>
+        </div>
+        <div class="esg-image-wrap reveal-css reveal-css-delay-2">
+          <img src="images.jpg" alt="Apoio a comunidade local" loading="lazy">
+        </div>
+
+        <!-- G: Governança -->
+        <div class="card-dif card-gov reveal-css reveal-css-delay-2">
+          <div class="card-dif-top">
+            <div class="card-header-flex">
+              <div class="card-icon"><i data-lucide="shield-check"></i></div>
+              <h3 class="card-title">Governança</h3>
             </div>
-            <div class="tl-content">
-              <h3>Expansão de Portfólio</h3>
-              <p>Salto para mais de 1.000 itens catalogados e grandes parcerias com construtoras.</p>
-            </div>
+            <p class="card-desc">Colocamos a ética e a transparência no centro de todas as nossas relações. A Babitonga adota e fiscaliza rigorosamente uma política de <strong>tolerância zero contra fraudes</strong> operacionais e financeiras, assegurando um ambiente corporativo íntegro e seguro para construtores, parceiros e clientes finais.</p>
           </div>
-          <div class="timeline-item">
-            <div class="tl-icon-wrap">
-              <div class="tl-dot"></div>
-            </div>
-            <div class="tl-content">
-              <h3>Referência Consolidada</h3>
-              <p>Reconhecimento como parceiro essencial da construção em São Francisco do Sul.</p>
-            </div>
-          </div>
+          <span class="card-num">G</span>
         </div>
+        <div class="esg-image-wrap reveal-css reveal-css-delay-3">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop" alt="Transparência e Governança" loading="lazy">
+        </div>
+
       </div>
     </div>
-  </div>
-</section>
-
-<!-- DIFERENCIAIS (BENTO GRID) -->
-<section id="diferenciais" class="py-section">
-  <div class="glow-bg glow-orange" style="top: 30%; right: -10%;"></div>
-  <div class="section-container">
-    <div class="section-header-stacked">
-      <span class="section-eyebrow">Nossos Diferenciais</span>
-      <h2 class="section-title">Força Corporativa. <br><em>Proximidade</em> Humana.</h2>
-    </div>
-
-    <div class="bento-grid">
-      <div class="card-dif wide-col">
-        <div class="card-dif-top">
-          <div class="card-icon"><i data-lucide="users"></i></div>
-          <h3 class="card-title">Atendimento Humanizado</h3>
-          <p class="card-desc">Na Babitonga, entendemos o escopo da sua obra individualmente para sugerir a compra inteligente dos materiais necessários.</p>
-        </div>
-        <span class="card-num">01</span>
-      </div>
-
-      <div class="card-dif">
-        <div class="card-dif-top">
-          <div class="card-icon"><i data-lucide="truck"></i></div>
-          <h3 class="card-title">Entrega Inteligente</h3>
-          <p class="card-desc">Frota própria e descarregamento técnico no local exato solicitado pelo construtor.</p>
-        </div>
-        <span class="card-num">02</span>
-      </div>
-
-      <div class="card-dif">
-        <div class="card-dif-top">
-          <div class="card-icon"><i data-lucide="award"></i></div>
-          <h3 class="card-title">Normatização ABNT</h3>
-          <p class="card-desc">Fornecemos exclusivamente insumos que atendem aos rígidos critérios de resistência estrutural.</p>
-        </div>
-        <span class="card-num">03</span>
-      </div>
-
-      <div class="card-dif wide-col">
-        <div class="card-dif-top">
-          <div class="card-icon"><i data-lucide="banknote"></i></div>
-          <h3 class="card-title">Preço Justo e Flexibilidade</h3>
-          <p class="card-desc">Propostas financeiras competitivas e condições de faturamento flexíveis para parceiros recorrentes.</p>
-        </div>
-        <span class="card-num">04</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALERIA (BENTO GRID PLACEMENTS) -->
-<section id="galeria" class="py-section">
-  <div class="glow-bg glow-blue" style="bottom: 20%; left: -10%;"></div>
-  <div class="section-container">
-    <div class="section-header-stacked">
-      <span class="section-eyebrow">Estrutura &amp; Insumos</span>
-      <h2 class="section-title">Nosso estoque de <em>suprimentos</em>.</h2>
-    </div>
-
-    <div class="gallery-bento">
-      <div class="gal-item gal-item-1">
-        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1000&auto=format&fit=crop" alt="Estoque centralizado" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Infraestrutura</span>
-          <span class="gal-name">Estoque Centralizado</span>
-        </div>
-      </div>
-      <div class="gal-item gal-item-2">
-        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop" alt="Materiais básicos" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Insumos</span>
-          <span class="gal-name">Materiais Básicos</span>
-        </div>
-      </div>
-      <div class="gal-item gal-item-3">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Acabamento" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Construção</span>
-          <span class="gal-name">Fase de Acabamento</span>
-        </div>
-      </div>
-      <div class="gal-item gal-item-4">
-        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1000&auto=format&fit=crop" alt="Loja física" loading="lazy">
-        <div class="gal-overlay">
-          <span class="gal-tag">Atendimento</span>
-          <span class="gal-name">Espaço Interno da Loja</span>
-        </div>
-      </div>
-      <div class="gal-item gal-item-5">
-        <video src="ferramentas%20girando.mp4" autoplay loop muted playsinline></video>
-        <div class="gal-overlay">
-          <span class="gal-tag">Equipamentos</span>
-          <span class="gal-name">Ferramentas</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NÚMEROS / STATS -->
-<section id="numeros" class="py-section">
-  <div class="section-container">
-    <div class="nums-wrapper">
-      <div class="nums-grid">
-        <div class="num-item">
-          <div class="num-value"><span class="counter" data-target="35000">0</span><span class="num-suffix">+</span></div>
-          <span class="num-label">Clientes Atendidos</span>
-        </div>
-        <div class="num-item">
-          <div class="num-value"><span class="counter" data-target="1000">0</span><span class="num-suffix">+</span></div>
-          <span class="num-label">Produtos em Catálogo</span>
-        </div>
-        <div class="num-item">
-          <div class="num-value"><span class="counter" data-target="4.8">0</span><span class="num-suffix">★</span></div>
-          <span class="num-label">Avaliação Google</span>
-        </div>
-        <div class="num-item">
-          <div class="num-value"><span class="counter" data-target="2020">0</span></div>
-          <span class="num-label">Ano de Fundação</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DEPOIMENTOS -->
-<section id="depoimentos" class="py-section">
-  <div class="glow-bg glow-orange" style="bottom: 10%; right: -5%;"></div>
-  <div class="section-container">
-    <div class="section-header-stacked">
-      <span class="section-eyebrow">Depoimentos</span>
-      <h2 class="section-title">O que dizem nossos <em>parceiros</em>.</h2>
-    </div>
-
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Atendimento excepcional e entrega sempre no prazo. A Babitonga se tornou nossa parceira principal em todas as obras."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">M</div>
-          <div>
-            <div class="testimonial-name">Marcos Silva</div>
-            <div class="testimonial-role">Engenheiro Civil</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Preço justo e materiais de qualidade. O Bruno sempre nos atende com dedicação e transparência total."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">R</div>
-          <div>
-            <div class="testimonial-name">Roberto Costa</div>
-            <div class="testimonial-role">Construtora RC</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"A logística deles é impecável. Entregam no local exato e no horário combinado. Recomendo demais!"</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">A</div>
-          <div>
-            <div class="testimonial-name">Ana Ferreira</div>
-            <div class="testimonial-role">Arquiteta</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOCIAL PANELS -->
-<section id="social" class="py-section">
-  <div class="glow-bg glow-orange" style="top: 20%; left: 10%;"></div>
-  <div class="section-container">
-    <div class="social-panel">
-      <span class="section-eyebrow">Redes Sociais</span>
-      <h2 class="section-title">Acompanhe nossa rotina de <em>entregas</em>.</h2>
-      <p style="color: var(--text-muted); margin-top: 16px; line-height: 1.7;">Siga-nos no Instagram para acompanhar novos produtos, dicas e nosso dia a dia em São Francisco do Sul.</p>
-      <div class="social-btns">
-        <a href="https://instagram.com/babitongamateriais" target="_blank" class="btn-instagram" aria-label="Siga no Instagram">
-          <i data-lucide="instagram"></i>
-          <span>Seguir no Instagram</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section id="cta" class="py-section">
-  <div class="glow-bg glow-blue" style="bottom: 10%; right: 10%;"></div>
-  <div class="section-container">
-    <div class="cta-wrapper">
-      <div class="cta-content">
-        <span class="section-eyebrow">Faça seu Orçamento</span>
-        <h2 class="cta-title">Tudo pronto para iniciar sua <span>Obra</span>?</h2>
-        <p class="cta-desc">Fale agora com nosso time comercial e agende seu orçamento sem compromisso.</p>
-        <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-primary" aria-label="Fazer orçamento no WhatsApp">
-          <i data-lucide="message-circle"></i>
-          <span>Solicitar Orçamento</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contato">
-  <div class="footer-container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#inicio" class="logo-wrap" style="margin-bottom: 20px;">
-          <img src="Logo Babitonga.png" alt="Babitonga Logo" class="logo-mark">
-          <span class="logo-title">BABITONGA</span>
-        </a>
-        <p>Pontualidade e confiança na distribuição de materiais de construção em São Francisco do Sul, Santa Catarina.</p>
-        <div class="footer-socials">
-          <a href="https://instagram.com/babitongamateriais" target="_blank" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="https://wa.me/5547991664203" target="_blank" aria-label="WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h4>Navegação</h4>
-        <a href="#inicio">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#diferenciais">Diferenciais</a>
-        <a href="#galeria">Galeria</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Contato</h4>
-        <div class="footer-contact">
-          <i data-lucide="map-pin"></i>
-          <span>São Francisco do Sul, SC</span>
-        </div>
-        <div class="footer-contact">
-          <i data-lucide="phone"></i>
-          <span>(47) 99166-4203</span>
-        </div>
-        <div class="footer-contact">
-          <i data-lucide="mail"></i>
-          <span>contato@babitonga.com.br</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <span>&copy; 2026 Babitonga Materiais de Construção. Todos os direitos reservados.</span>
-      <span>Confiança do Começo ao Fim.</span>
-    </div>
-  </div>
-</footer>
+  </section>
+</main>
 
 <script>
-// INITIALIZE LUCIDE ICONS
-lucide.createIcons();
+  lucide.createIcons();
 
-// ANIMATED BACKGROUND - WEBGL (THREE.JS) - Shader.se Style
-const container = document.getElementById('webgl-container');
-let scene, camera, renderer, material, uniforms;
+  // Custom Cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let hasMouse = false;
 
-if (container && typeof THREE !== 'undefined') {
-  scene = new THREE.Scene();
-  camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-  camera.position.z = 1;
-
-  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
-
-  uniforms = {
-    u_time: { value: 0.0 },
-    u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-    u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
-    u_scroll: { value: 0.0 }
-  };
-
-  const vertexShader = `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = vec4(position, 1.0);
+  document.addEventListener('mousemove', (e) => {
+    if (!hasMouse) {
+      hasMouse = true;
+      document.body.classList.add('has-mouse');
     }
-  `;
-
-  // Shader that morphs based on time and scroll
-  const fragmentShader = `
-    uniform float u_time;
-    uniform vec2 u_resolution;
-    uniform vec2 u_mouse;
-    uniform float u_scroll;
-    varying vec2 vUv;
-
-    float random (in vec2 st) {
-      return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-    }
-
-    float noise (in vec2 st) {
-      vec2 i = floor(st);
-      vec2 f = fract(st);
-      float a = random(i);
-      float b = random(i + vec2(1.0, 0.0));
-      float c = random(i + vec2(0.0, 1.0));
-      float d = random(i + vec2(1.0, 1.0));
-      vec2 u = f * f * (3.0 - 2.0 * f);
-      return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-    }
-
-    float fbm (in vec2 st) {
-      float value = 0.0;
-      float amplitude = .5;
-      for (int i = 0; i < 5; i++) {
-        value += amplitude * noise(st);
-        st *= 2.0;
-        amplitude *= .5;
-      }
-      return value;
-    }
-
-    void main() {
-      vec2 st = gl_FragCoord.xy / u_resolution.xy;
-      st.x *= u_resolution.x / u_resolution.y;
-
-      vec2 mouse = u_mouse;
-      st += (mouse - 0.5) * 0.05;
-
-      // Scroll changes the coordinate space slightly to create a morphing/traveling effect
-      st.y += u_scroll * 0.5;
-
-      vec2 q = vec2(0.);
-      q.x = fbm(st + 0.00 * u_time);
-      q.y = fbm(st + vec2(1.0));
-
-      vec2 r = vec2(0.);
-      r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.15 * u_time);
-      r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.126 * u_time);
-
-      float f = fbm(st + r);
-
-      // Babitonga colors: Dark blue to vibrant orange glow
-      vec3 colorBase = mix(vec3(0.05, 0.08, 0.14), vec3(0.03, 0.05, 0.09), clamp((f*f)*4.0, 0.0, 1.0)); // Dark blues
-      vec3 colorAccent = vec3(0.94, 0.47, 0.12); // Orange (#f07820)
-      vec3 colorBlue = vec3(0.04, 0.24, 0.51); // Secondary Blue (#0b3d82)
-
-      vec3 color = mix(colorBase, colorBlue, clamp(length(q), 0.0, 1.0));
-      
-      // Intense orange highlights based on scroll and noise
-      float highlight = clamp(length(r.x) * (f * 1.5), 0.0, 1.0);
-      color = mix(color, colorAccent, highlight * 0.3);
-
-      gl_FragColor = vec4((f*f*f + .6 * f*f + .5 * f) * color, 0.5); // 0.5 alpha to blend with CSS background
-    }
-  `;
-
-  material = new THREE.ShaderMaterial({
-    vertexShader,
-    fragmentShader,
-    uniforms,
-    depthWrite: false,
-    depthTest: false,
-    transparent: true
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top = e.clientY + 'px';
   });
 
-  const geometry = new THREE.PlaneGeometry(2, 2);
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  window.addEventListener('resize', () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+  document.querySelectorAll('a, button, .card-dif').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
   });
 
-  const clock = new THREE.Clock();
-  function animate() {
-    requestAnimationFrame(animate);
-    uniforms.u_time.value = clock.getElapsedTime();
-    renderer.render(scene, camera);
-  }
-  animate();
-}
-
-// Update shader scroll uniform via ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-ScrollTrigger.create({
-  trigger: "body",
-  start: "top top",
-  end: "bottom bottom",
-  onUpdate: (self) => {
-    if (uniforms) uniforms.u_scroll.value = self.progress * 5.0; // Multiplier for more intense morphing
-  }
-});
-
-// PRELOADER ANIMATION
-window.addEventListener('load', () => {
-  const bar = document.getElementById('preloader-bar');
-  const preloader = document.getElementById('preloader');
-  const logo = document.getElementById('preloader-logo');
-  
-  gsap.to(logo, { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' });
-  
-  let width = 0;
-  const interval = setInterval(() => {
-    width += 3;
-    if (width <= 100) {
-      bar.style.width = width + '%';
-    } else {
-      clearInterval(interval);
-      setTimeout(() => {
-        gsap.to(preloader, {
-          opacity: 0,
-          duration: 0.7,
-          ease: 'power2.out',
-          onComplete: () => {
-            preloader.style.display = 'none';
-            startHeroAnimations();
-          }
-        });
-      }, 300);
-    }
-  }, 25);
-});
-
-// CUSTOM CURSOR - SMOOTH PHYSICS
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let hasMouse = false;
-let mouseX = 0, mouseY = 0;
-let ringX = 0, ringY = 0;
-
-document.addEventListener('mousemove', (e) => {
-  if (!hasMouse) {
-    hasMouse = true;
-    document.body.classList.add('has-mouse');
-    ringX = e.clientX;
-    ringY = e.clientY;
-  }
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  
-  gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.05, ease: 'none' });
-});
-
-// Smooth ring follow with lerp
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  ring.style.left = ringX + 'px';
-  ring.style.top = ringY + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-document.addEventListener('mouseleave', () => {
-  document.body.classList.remove('has-mouse');
-  hasMouse = false;
-});
-
-// Grow cursor on interactive elements
-document.querySelectorAll('a, button, .card-dif, .gal-item, .testimonial-card').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
-});
-
-// HERO ENTRY ANIMATION
-function startHeroAnimations() {
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  tl.from('#header', { opacity: 0, y: -30, duration: 0.8 })
-    .from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
-    .from('.hero-title', { opacity: 0, y: 30, duration: 0.8 }, '-=0.4')
-    .from('.hero-desc', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
-    .from('.hero-ctas', { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
-    .from('.glow-bg', { opacity: 0, scale: 0.5, duration: 1, stagger: 0.2 }, '-=0.8');
-    
-  // "ENTERING THE TV" IMMERSIVE SCROLL ANIMATION
-  const portalTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#inicio',
-      start: 'top top',
-      end: '+=1000', // Adjusted duration for a perfect dive
-      scrub: 1,
-      pin: true,
-      pinSpacing: true, // MUST be true so we don't skip the next sections!
-      anticipatePin: 1
-    }
+  // Header Scroll
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
   });
 
-  // Deep zoom the background and fade it out VERY LATE (power3.in)
-  // so the user flies through the image before it disappears
-  portalTl.to('#hero-bg', {
-    scale: 20,
-    opacity: 0,
-    ease: 'power3.in'
-  }, 0);
-
-  // Fade out the content without scaling to prevent text glitches
-  portalTl.to('#hero-content, .glow-bg', {
-    y: -100,
-    opacity: 0,
-    ease: 'power2.in'
-  }, 0);
-}
-
-// SCROLL PROGRESS & HEADER EFFECT
-
-
-window.addEventListener('scroll', () => {
-  const header = document.getElementById('header');
-  const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  document.getElementById('progress').style.width = scrollPercent + '%';
-
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-});
-
-// MOBILE MENU TOGGLE
-let menuOpen = false;
-function toggleMenu() {
-  menuOpen = !menuOpen;
-  const menu = document.getElementById('mobile-menu');
-  if (menuOpen) {
-    menu.classList.add('open');
-  } else {
-    menu.classList.remove('open');
-  }
-}
-
-// GSAP REGISTER
-gsap.registerPlugin(ScrollTrigger);
-
-// CARD TILT PHYSICS (3D EFFECT)
-document.querySelectorAll('.card-dif').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    if (!hasMouse) return;
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left - r.width / 2) / r.width;
-    const y = (e.clientY - r.top - r.height / 2) / r.height;
-    gsap.to(card, {
-      rotateX: -y * 6,
-      rotateY: x * 6,
-      translateZ: 8,
-      duration: 0.3,
-      ease: 'power2.out'
-    });
-  });
-  card.addEventListener('mouseleave', () => {
-    gsap.to(card, {
-      rotateX: 0,
-      rotateY: 0,
-      translateZ: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
-  });
-});
-
-// FOOLPROOF INTERSECTION OBSERVER REVEALS (Native CSS - zero bugs)
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.15
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-// Auto-assign reveal classes and delays based on groups
-const revealGroups = [
-  { parent: '#sobre', selectors: ['.section-eyebrow', '.sobre-title', '.sobre-text', '.tl-item'] },
-  { parent: '#diferenciais', selectors: ['.section-eyebrow', '.section-title', '.card-dif'] },
-  { parent: '#galeria', selectors: ['.section-eyebrow', '.section-title', '.gal-item'] },
-  { parent: '#depoimentos', selectors: ['.section-eyebrow', '.section-title', '.testimonial-card'] }
-];
-
-revealGroups.forEach(group => {
-  const parent = document.querySelector(group.parent);
-  if (!parent) return;
-  
-  let delayIndex = 0;
-  group.selectors.forEach(selector => {
-    const elements = parent.querySelectorAll(selector);
-    elements.forEach(el => {
-      el.classList.add('reveal-css');
-      if (delayIndex > 0) {
-        el.classList.add(`reveal-css-delay-${Math.min(delayIndex, 4)}`);
-      }
-      observer.observe(el);
-      delayIndex++;
-    });
-  });
-});
-
-// Recalculate ScrollTrigger on load just in case the initial hero pin messes up start positions
-window.addEventListener('load', () => {
-  setTimeout(() => ScrollTrigger.refresh(), 500);
-});
-
-
-// COUNTER STATISTICS ANIMATION
-const statsSection = document.getElementById('numeros');
-const counters = document.querySelectorAll('.counter');
-
-const runCounters = () => {
-  counters.forEach(counter => {
-    const target = parseFloat(counter.getAttribute('data-target'));
-    const duration = 2;
-    const obj = { val: 0 };
-    
-    gsap.to(obj, {
-      val: target,
-      duration: duration,
-      ease: 'power3.out',
-      onUpdate: () => {
-        if (target % 1 !== 0) {
-          counter.textContent = obj.val.toFixed(1).replace('.', ',');
-        } else {
-          counter.textContent = Math.floor(obj.val).toLocaleString('pt-BR');
-        }
+  // Native CSS Reveals
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
       }
     });
-  });
-};
+  }, { threshold: 0.15 });
 
-ScrollTrigger.create({
-  trigger: statsSection,
-  start: 'top 80%',
-  onEnter: runCounters,
-  once: true
-});
-// LENIS SMOOTH SCROLLING (Shader.se style buttery scroll)
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false,
-  touchMultiplier: 2,
-  infinite: false,
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-
-requestAnimationFrame(raf);
-
-// Sync Lenis with ScrollTrigger
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0, 0);
-
-// FIX ANCHOR LINKS (Início scrolling to 0)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href');
-    if (targetId === '#inicio') {
-      lenis.scrollTo(0, { duration: 1.5, ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-    } else {
-      const target = document.querySelector(targetId);
-      if (target) {
-        lenis.scrollTo(target, { offset: -80, duration: 1.5, ease: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-      }
-    }
-  });
-});
-
+  document.querySelectorAll('.reveal-css').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
