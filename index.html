@@ -129,6 +129,15 @@ body.has-mouse .cursor-grow #cursor-ring {
   animation: orbFloat 10s ease-in-out infinite;
 }
 
+@media (max-width: 768px) {
+  .glow-bg {
+    width: 70vw;
+    height: 70vw;
+    max-width: 280px;
+    filter: blur(80px);
+  }
+}
+
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
   33% { transform: translate(2%, -4%) scale(1.05); opacity: 0.5; }
@@ -276,6 +285,7 @@ nav.desktop a.active::after { width: 100%; background: transparent; }
   padding: 120px 24px;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
 .section-container {
@@ -471,6 +481,22 @@ nav.desktop a.active::after { width: 100%; background: transparent; }
 .reveal-css-delay-2 { transition-delay: 0.2s; }
 
 /* RESPONSIVE */
+#hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+#hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
 @media (max-width: 992px) {
   .card-dif, .esg-image-wrap { grid-column: span 12; }
 }
@@ -493,28 +519,12 @@ nav.desktop a.active::after { width: 100%; background: transparent; }
   .hero-desc { font-size: 15px; }
 }
 
-#hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-#hamburger span {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background: #fff;
-  transition: transform 0.3s, opacity 0.3s;
-}
-
 #mobile-menu {
   position: fixed;
   inset: 0;
-  background: rgba(12, 21, 36, 0.96);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(12, 21, 36, 0.72);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -523,6 +533,11 @@ nav.desktop a.active::after { width: 100%; background: transparent; }
   gap: 32px;
   transform: translateY(-100%);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #mobile-menu {
+    background: rgba(12, 21, 36, 0.96);
+  }
 }
 #mobile-menu.open { transform: translateY(0); }
 #mobile-menu a {
@@ -541,16 +556,16 @@ nav.desktop a.active::after { width: 100%; background: transparent; }
 <div id="cursor-ring"></div>
 
 <div id="mobile-menu">
-  <a href="https://babitonga-lojao.vercel.app/#inicio" onclick="toggleMenu()">Início</a>
-  <a href="https://babitonga-lojao.vercel.app/#sobre" onclick="toggleMenu()">Sobre</a>
-  <a href="https://babitonga-lojao.vercel.app/#diferenciais" onclick="toggleMenu()">Diferenciais</a>
-  <a href="https://babitonga-lojao.vercel.app/#galeria" onclick="toggleMenu()">Galeria</a>
-  <a href="https://babitonga-lojao.vercel.app/#contato" onclick="toggleMenu()">Contato</a>
-  <a href="https://esg-eight-tau.vercel.app/" onclick="toggleMenu()" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
+  <a href="index.html#inicio" onclick="toggleMenu()">Início (Site principal)</a>
+  <a href="index.html#sobre" onclick="toggleMenu()">Sobre</a>
+  <a href="index.html#diferenciais" onclick="toggleMenu()">Diferenciais</a>
+  <a href="index.html#galeria" onclick="toggleMenu()">Galeria</a>
+  <a href="index.html#contato" onclick="toggleMenu()">Contato</a>
+  <a href="esg.html" onclick="toggleMenu()" class="nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
 </div>
 
 <header id="header">
-  <a href="https://babitonga-lojao.vercel.app/#inicio" class="logo-wrap" aria-label="Voltar ao início">
+  <a href="index.html#inicio" class="logo-wrap" aria-label="Voltar ao início">
     <img src="Logo Babitonga.png" alt="Babitonga Logo" class="logo-mark">
     <div>
       <span class="logo-title">BABITONGA</span>
@@ -559,12 +574,12 @@ nav.desktop a.active::after { width: 100%; background: transparent; }
   </a>
 
   <nav class="desktop">
-    <a href="https://babitonga-lojao.vercel.app/#inicio">Início</a>
-    <a href="https://babitonga-lojao.vercel.app/#sobre">Sobre</a>
-    <a href="https://babitonga-lojao.vercel.app/#diferenciais">Diferenciais</a>
-    <a href="https://babitonga-lojao.vercel.app/#galeria">Galeria</a>
-    <a href="https://babitonga-lojao.vercel.app/#contato">Contato</a>
-    <a href="https://esg-eight-tau.vercel.app/" class="active nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
+    <a href="index.html#inicio">Início</a>
+    <a href="index.html#sobre">Sobre</a>
+    <a href="index.html#diferenciais">Diferenciais</a>
+    <a href="index.html#galeria">Galeria</a>
+    <a href="index.html#contato">Contato</a>
+    <a href="esg.html" class="active nav-esg-link"><span class="e">E</span><span class="s">S</span><span class="g">G</span></a>
   </nav>
 
   <a href="https://wa.me/5547991664203?text=Olá!%20Gostaria%20de%20um%20orçamento." target="_blank" class="btn-wpp desktop" aria-label="Falar no WhatsApp">
